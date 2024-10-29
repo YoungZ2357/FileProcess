@@ -23,20 +23,27 @@ def scan_all(src_dir) -> list:
     return paths
 
 
-def generate_path_pair(file_paths: list, dst_dir: str) -> list[list]:
+def generate_path_pair(file_paths: list, src_dir: str, dst_dir: str) -> list[list]:
     """生成 [原始文件路径, 初始目标文件路径]列表
     注：仅用于进一步封装
 
+
     :param file_paths: 路径列表
+    :param src_dir: 文件所在目录
     :param dst_dir: 目标路径
     :return:
     """
     path_pairs = []
-
     for src_path in file_paths:
-        file_name = os.path.basename(src_path)
+        relative_path = os.path.relpath(src_path, src_dir)
+        sub_dir_name, file_name = os.path.split(relative_path)
 
-        dst_file_path = os.path.join(dst_dir, file_name)
+        if sub_dir_name:
+            new_file_name = f"{sub_dir_name.replace(os.sep, '_')}_{file_name}"
+        else:
+            new_file_name = f"root_{file_name}"
+
+        dst_file_path = os.path.join(dst_dir, new_file_name)
         path_pairs.append([src_path, dst_file_path])
     return path_pairs
 
@@ -66,4 +73,4 @@ def copy_file(path_pairs, verbose: bool = True) -> None:
     for src_path, dst_path in path_pairs:
         shutil.copy2(src_path, dst_path)
         if verbose:
-            print(f"[{f'{src_path}':<50}] ---COPIED---> [{f'{dst_path}':<50}]")
+            print(f"[{f'{src_path}':<30}] ---COPIED---> [{f'{dst_path}':<30}]")

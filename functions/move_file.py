@@ -10,7 +10,7 @@ import core.move_file_core as mvf
 
 def copy_all(src_dir, dst_dir, by_suffix: bool = False, verbose: bool = True):
     file_paths = mvf.scan_all(src_dir)
-    path_pairs = mvf.generate_path_pair(file_paths, dst_dir)
+    path_pairs = mvf.generate_path_pair(file_paths, src_dir, dst_dir)
 
     if by_suffix:
         path_pairs = mvf.change_dst_by_suffix(path_pairs)

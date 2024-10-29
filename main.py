@@ -8,7 +8,7 @@ import functions as f
 
 
 if __name__ == '__main__':
-    # src = "tests/testfiles"
-    # dst = "tests/dst"
-    # f.copy_all(src, dst)
-    pass
+    src = "tests/testfiles"
+    dst = "tests/dst"
+    f.copy_all(src, dst)
+

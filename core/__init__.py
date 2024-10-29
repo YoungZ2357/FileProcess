@@ -5,5 +5,5 @@
 # @Project : FileProcess
 
 
-import move_file_core
-import utils
+import core.move_file_core
+import core.utils
