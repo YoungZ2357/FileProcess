@@ -5,3 +5,4 @@
 # @Project : FileProcess
 from move_file.functional import copy_all
 from move_file.core import CopyMission
+import move_file.functional as functional

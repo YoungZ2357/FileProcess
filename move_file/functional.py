@@ -7,7 +7,7 @@
 import os
 import shutil
 
-import move_file.utils
+import move_file.utils as utils
 
 
 def scan_all(src_dir) -> list:
