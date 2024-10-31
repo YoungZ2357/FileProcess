@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2024/10/29 下午4:23
-# @Author  : Qingyang Zhang
-# @File    : move_file_core.py
+# @Time    : 2024/10/29 下午3:50
+# @Author  :
+# @File    : functional.py
 # @Project : FileProcess
 
 import os
 import shutil
+
+import move_file.utils
 
 
 def scan_all(src_dir) -> list:
@@ -62,15 +64,21 @@ def change_dst_by_suffix(path_pairs: list[list]) -> list[list]:
     return updated_pairs
 
 
-def copy_file(path_pairs, verbose: bool = True) -> None:
-    """根据[原始文件路径, 初始目标文件路径] 执行复制操作
+def copy_all(src_dir, dst_dir, by_suffix: bool = False, verbose: bool = True):
+    """已停止更新!!!
 
+    执行文件移动的函数式调用，将一个目录下所有文件取到指定位置
 
-    :param path_pairs: [原始文件路径, 初始目标文件路径] 列表
-    :param verbose: 显示复制的执行信息
-    :return:
+    :param src_dir: 待提取文件所在路径
+    :param dst_dir: 目标路径
+    :param by_suffix: 是否按照后缀归类
+    :param verbose: 是否显示复制信息
+    :return: None
     """
-    for src_path, dst_path in path_pairs:
-        shutil.copy2(src_path, dst_path)
-        if verbose:
-            print(f"[{f'{src_path}':<30}] ---COPIED---> [{f'{dst_path}':<30}]")
+    file_paths = scan_all(src_dir)
+    path_pairs = generate_path_pair(file_paths, src_dir, dst_dir)
+
+    if by_suffix:
+        path_pairs = change_dst_by_suffix(path_pairs)
+
+    utils.copy_file(path_pairs, verbose=verbose)

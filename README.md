@@ -6,8 +6,10 @@
 
 #### 1.批量移动文件
   - 根据文件后缀划分
+
 ```python
-import functions as f
+import move_file as f
+
 if __name__ == "__main__":
     src = "INSERT YOUR SOURCE DIRECTORY HERE"
     dst = "INSERT YOUR DESTINATION DIRECTORY HERE"

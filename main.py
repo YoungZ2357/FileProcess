@@ -4,11 +4,11 @@
 # @File    : main.py
 # @Project : FileProcess
 
-import functions as f
+import move_file as f
 
 
 if __name__ == '__main__':
-    src = "tests/testfiles"
-    dst = "tests/dst"
-    f.copy_all(src, dst)
-
+    src = r"tests/testfiles"
+    dst = r"tests/dst"
+    f.copy_all(src, dst, by_suffix=True)
+    pass
